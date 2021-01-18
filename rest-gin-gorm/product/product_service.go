@@ -1,10 +1,13 @@
 package product
 
+import "fmt"
+
 type ProductService struct {
 	ProductRepository ProductRepository
 }
 
 func ProvideProductService(p ProductRepository) ProductService {
+	fmt.Println("ProvideProductService called")
 	return ProductService{ProductRepository: p}
 }
 
