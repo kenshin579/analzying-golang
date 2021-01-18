@@ -1,10 +1,10 @@
 package product
 
 import (
-	"strconv"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 type ProductAPI struct {
@@ -22,14 +22,15 @@ func (p *ProductAPI) FindAll(c *gin.Context) {
 }
 
 func (p *ProductAPI) FindByID(c *gin.Context) {
-	id, _ :=  strconv.Atoi(c.Param("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 	product := p.ProductService.FindByID(uint(id))
-	
+
 	c.JSON(http.StatusOK, gin.H{"product": ToProductDTO(product)})
 }
 
 func (p *ProductAPI) Create(c *gin.Context) {
 	var productDTO ProductDTO
+	log.Println("productDTO", productDTO)
 	err := c.BindJSON(&productDTO)
 	if err != nil {
 		log.Fatalln(err)
@@ -51,7 +52,7 @@ func (p *ProductAPI) Update(c *gin.Context) {
 		return
 	}
 
-	id, _ :=  strconv.Atoi(c.Param("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 	product := p.ProductService.FindByID(uint(id))
 	if product == (Product{}) {
 		c.Status(http.StatusBadRequest)
@@ -66,7 +67,7 @@ func (p *ProductAPI) Update(c *gin.Context) {
 }
 
 func (p *ProductAPI) Delete(c *gin.Context) {
-	id, _ :=  strconv.Atoi(c.Param("id"))
+	id, _ := strconv.Atoi(c.Param("id"))
 	product := p.ProductService.FindByID(uint(id))
 	if product == (Product{}) {
 		c.Status(http.StatusBadRequest)

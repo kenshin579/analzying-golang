@@ -1,16 +1,26 @@
 package main
 
 import (
+	"log"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/gin-gonic/gin"
-
+	"github.com/joho/godotenv"
 	"rest-gin-gorm/product"
 )
 
-func initDB() *gorm.DB{
+func loadTheEnv() {
+	// load .env file
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+}
+
+func initDB() *gorm.DB {
 	db, err := gorm.Open("mysql", os.Getenv("DB_URL"))
 	if err != nil {
 		panic(err)
@@ -22,6 +32,7 @@ func initDB() *gorm.DB{
 }
 
 func main() {
+	//loadTheEnv()
 	db := initDB()
 	defer db.Close()
 

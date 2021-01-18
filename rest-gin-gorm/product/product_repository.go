@@ -1,6 +1,7 @@
 package product
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -10,6 +11,7 @@ type ProductRepository struct {
 }
 
 func ProvideProductRepostiory(DB *gorm.DB) ProductRepository {
+	fmt.Println("ProvideProductRepostiory called")
 	return ProductRepository{DB: DB}
 }
 
