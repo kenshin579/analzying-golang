@@ -1,0 +1,35 @@
+### create new product
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "code": "p3",
+  "price": "20"
+}
+
+
+### Get product
+GET http://localhost:8080/products/1
+
+
+### Update product
+PUT http://localhost:8080/products/1
+Content-Type: application/json
+
+{
+  "code": "p1",
+  "price": "15"
+}
+
+
+### Delete product
+DELETE http://localhost:8080/products/1
+
+### find all products
+GET http://localhost:8080/products
+Accept: application/json
+
+
+### find a product
+
+
